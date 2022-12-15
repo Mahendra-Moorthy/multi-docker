@@ -14,3 +14,5 @@ after_success:
   - docker build -t mahendra/multi-nginx ./nginx
   - docker build -t mahendra/multi-server ./server
   - docker build -t mahendra/multi-worker ./worker
+
+  - echo '$DOCKER_PASSWORD' | docker login -u '$DOCKER_ID' --password-stdin
