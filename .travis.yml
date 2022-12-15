@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t mahendra/react-test -f ./client/Dockerfile.dev ./client
+
+script: 
+  - docker run mahendra/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t mahendra/multi-client ./client
+  - docker build -t mahendra/multi-nginx ./nginx
+  - docker build -t mahendra/multi-server ./server
+  - docker build -t mahendra/multi-worker ./worker
